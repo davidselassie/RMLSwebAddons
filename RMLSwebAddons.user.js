@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name         RMLSweb Addons
-// @namespace    http://selassid.net/
+// @name         RMLSwebAddons
+// @namespace    https://github.com/selassid/RMLSwebAddons
 // @version      0.1
+// @updateURL    https://raw.githubusercontent.com/selassid/RMLSwebAddons/master/RMLSwebAddons.user.js
 // @description  Adds Google Maps links to RMLSweb!
 // @author       David Selassie
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.2/babel.js
