@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         RMLSwebAddons
 // @namespace    https://github.com/selassid/RMLSwebAddons
-// @version      0.1
+// @version      1.0.0
 // @updateURL    https://raw.githubusercontent.com/selassid/RMLSwebAddons/master/RMLSwebAddons.user.js
 // @description  Adds Google Maps and permalinks to RMLSweb
 // @author       David Selassie
-// @match        http://www.rmlsweb.com/*
+// @match        http://www.rmlsweb.com/v2/public/report.asp
 // ==/UserScript==
 
 (function() {
