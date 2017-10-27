@@ -3,7 +3,7 @@
 // @namespace    https://github.com/selassid/RMLSwebAddons
 // @version      0.1
 // @updateURL    https://raw.githubusercontent.com/selassid/RMLSwebAddons/master/RMLSwebAddons.user.js
-// @description  Adds Google Maps and permalinks to RMLSweb!
+// @description  Adds Google Maps and permalinks to RMLSweb
 // @author       David Selassie
 // @match        http://www.rmlsweb.com/*
 // ==/UserScript==
@@ -16,19 +16,20 @@
 
     let reportItemHeaders = document.querySelectorAll('.reportItemHeader');
     for (let reportItemHeader of reportItemHeaders) {
-        let mlsn = reportItemHeader.innerText.slice(6).trim();
+        let mlsn = reportItemHeader.innerText.split(' ')[1].trim();
 
         // Setup anchors we can link to.
         reportItemHeader.id = mlsn;
 
         // Get address and make Google Maps links right after internal map links.
         let reportBox = reportItemHeader.nextElementSibling;
-        let existingMapLink = reportBox.querySelector('.MAPLINK_ADDRESS_FULL');
+        let existingMapLink = reportBox.querySelector('.MAPLINK_ADDRESS_FULL:not(.GOOGLE_EXT)');
         let propertyAddress = existingMapLink.parentElement.firstChild.nodeValue;
         let newLink = document.createElement('a');
         newLink.className = 'MAPLINK_ADDRESS_FULL GOOGLE_EXT';
         newLink.href = 'https://www.google.com/maps/search/?api=1&query=' + propertyAddress;
-        newLink.innerHTML = '<span class="BOXLINK BOXICON_M np" title="Google Street View">&nbsp;G&nbsp;</span>';
+        newLink.setAttribute('target', 'gmap');
+        newLink.innerHTML = '<span class="BOXLINK BOXICON_M np" title="Google Map">&nbsp;G&nbsp;</span>';
         // Insert before.
         existingMapLink.parentNode.insertBefore(newLink, existingMapLink.nextSibling);
 
