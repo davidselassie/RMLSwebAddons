@@ -5,7 +5,7 @@
 // @updateURL    https://raw.githubusercontent.com/selassid/RMLSwebAddons/master/RMLSwebAddons.user.js
 // @description  Adds Google Maps and permalinks to RMLSweb
 // @author       David Selassie
-// @match        http://www.rmlsweb.com/v2/public/report.asp
+// @match        http://www.rmlsweb.com/v2/public/report.asp*
 // ==/UserScript==
 
 (function() {
