@@ -11,11 +11,19 @@
 (function() {
     'use strict';
 
+    let baseUrl = window.location.href.split('?')[0] + '?';
     let queryParams = new URLSearchParams(document.location.search.substring(1));
 
-    let existingMapLinks = document.querySelectorAll('.MAPLINK_ADDRESS_FULL:not(.GOOGLE_EXT)');
-    for (let existingMapLink of existingMapLinks) {
-        // Insert Google Maps links.
+    let reportItemHeaders = document.querySelectorAll('.reportItemHeader');
+    for (let reportItemHeader of reportItemHeaders) {
+        let mlsn = reportItemHeader.innerText.slice(6).trim();
+
+        // Setup anchors we can link to.
+        reportItemHeader.id = mlsn;
+
+        // Get address and make Google Maps links right after internal map links.
+        let reportBox = reportItemHeader.nextElementSibling;
+        let existingMapLink = reportBox.querySelector('.MAPLINK_ADDRESS_FULL');
         let propertyAddress = existingMapLink.parentElement.firstChild.nodeValue;
         let newLink = document.createElement('a');
         newLink.className = 'MAPLINK_ADDRESS_FULL GOOGLE_EXT';
@@ -24,21 +32,12 @@
         // Insert before.
         existingMapLink.parentNode.insertBefore(newLink, existingMapLink.nextSibling);
 
-        // Insert permalinks to entry.
-        let mlsnTd = existingMapLink.parentElement.previousSibling;
-        let mlsn = mlsnTd.innerText;
+        // Update header text to be permalink with address.
+        let reportItemHeaderText = reportItemHeader.querySelector('b');
         let linkQueryParams = new URLSearchParams(queryParams);
         linkQueryParams.set("mlsn", mlsn);
-        let href = window.location.href.split('?')[0] + linkQueryParams.toString();
-        mlsnTd.innerHTML = '<a href="' + href + '">' + mlsn + '</a>';
-    }
-
-    // Create all plain MLSN anchors before each entry.
-    let idAnchors = document.querySelectorAll('div[id^="REPORT_ITEM_"]');
-    for (let idAnchor of idAnchors) {
-        idAnchor.style = '';
-        let oldStructuredId = idAnchor.id;
-        idAnchor.id = oldStructuredId.split('_')[2];
+        let href = baseUrl + linkQueryParams.toString();
+        reportItemHeaderText.innerHTML = 'MLS#: <a href="' + href + '">' + mlsn + '</a> - ' + propertyAddress;
     }
 
     // Scroll to selected entry. Can't use anchor # because server parses it and hangs...
