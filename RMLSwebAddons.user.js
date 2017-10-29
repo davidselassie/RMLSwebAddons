@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         RMLSwebAddons
 // @namespace    https://github.com/selassid/RMLSwebAddons
-// @version      1.0.0
+// @version      1.0.1
 // @updateURL    https://raw.githubusercontent.com/selassid/RMLSwebAddons/master/RMLSwebAddons.user.js
 // @description  Adds Google Maps and permalinks to RMLSweb
 // @author       David Selassie
@@ -21,7 +21,7 @@
         // Get address and make Google Maps links right after internal map links.
         let reportBox = reportItemHeader.nextElementSibling;
         let existingMapLink = reportBox.querySelector('.MAPLINK_ADDRESS_FULL:not(.GOOGLE_EXT)');
-        let propertyAddress = existingMapLink.parentElement.firstChild.nodeValue;
+        let propertyAddress = existingMapLink.parentElement.firstChild.nodeValue.trim();
         let gmapLink = document.createElement('a');
         gmapLink.className = 'MAPLINK_ADDRESS_FULL GOOGLE_EXT';
         let gmapLinkQueryParams = new URLSearchParams();
